@@ -4,8 +4,7 @@ import axios from 'axios';
 const requestLinnworksSync = async () => {
   try {
     const request = await axios.post('https://strada.thetechout.com/api/linnworks/sync').then((response) => { return response.data });
-
-    console.log(request);
+    console.log("Linnworks Order Sync. " + request.message);
   } catch (error) {
     console.log(error);
     console.log("Failed to request Linnworks Sync");
