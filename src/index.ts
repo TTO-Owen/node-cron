@@ -1,5 +1,17 @@
 import cron from 'node-cron';
+import axios from 'axios';
+
+const requestLinnworksSync = async () => {
+  try {
+    await axios.post('https://strada.thetechout.com/api/linnworks/sync');
+  } catch (error) {
+    console.log(error);
+    console.log("Failed to request Linnworks Sync");
+  }
+}
+
 
 cron.schedule(`*/1 * * * *`, async () => {
-  console.log(`running your task...`);
+  console.log(`Runtime: Every Minute`);
+  requestLinnworksSync();
 });
