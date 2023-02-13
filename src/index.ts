@@ -12,7 +12,7 @@ const requestLinnworksSync = async () => {
 }
 
 
-cron.schedule(`*/1 * * * *`, async () => {
+cron.schedule(`*/1 7-19 * * *`, async () => {
   console.log(`Runtime: Every Minute`);
   requestLinnworksSync();
 });
