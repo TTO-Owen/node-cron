@@ -10,7 +10,7 @@ const requestLinnworksSync = async () => {
       .then((response) => {
         return response.data;
       });
-    console.log('Linnworks Order Sync. ' + request.message);
+    console.log('cled7kdse0000deq0ymdgv7au Order Sync. ' + request.message);
   } catch (error) {
     console.log(error);
     console.log('Failed to request Linnworks Sync');
