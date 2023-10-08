@@ -33,9 +33,36 @@ const requestLinnworksSync = async (time: string) => {
   }
 };
 
-cron.schedule(`*/0.5 7-19 * * *`, async () => {
+const requestAlgoliaSync = async (time: string) => {
+  try {
+    const request = await axios
+      .post(
+        'http://' + stradaUrl + '/api/algolia/sync'
+      );
+    if(request.status == 200) {
+      console.log(chalk.grey(`[${time}][${request.data.build}] Algolia Order Sync. ${request.data.message}`));
+    } else {
+      console.log(chalk.green(`[${time}][${request.data.build}] cled7kdse0000deq0ymdgv7au Order Sync. ${request.data.message}`));
+    }
+    failure = 0;
+  } catch (error) {
+    
+    if(failure != 1) {
+      emailError("Algolia Sync Failure")
+      failure = 1;
+    }
+    console.log(error);
+    console.log(chalk.red('Failed to request Algolia Sync'));
+  }
+};
+cron.schedule(`*/1 7-19 * * *`, async () => {
   const time = (new Date()).toISOString().slice(11,19);
   await requestLinnworksSync(time);
+});
+
+cron.schedule(`*/10 * * * *`, async () => {
+  const time = (new Date()).toISOString().slice(11,19);
+  await requestAlgoliaSync(time);
 });
 
 const emailError = async (error_string: string) => {
