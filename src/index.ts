@@ -3,7 +3,7 @@ import axios from 'axios';
 import chalk from 'chalk';
 import * as postmark from 'postmark'
 
-const stradaUrl = 'localhost:3000';
+const stradaUrl = 'beta-strada.thetechout.com';
 
 let failure = 0;
 
