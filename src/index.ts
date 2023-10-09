@@ -17,18 +17,19 @@ cron.schedule(`*/1 7-19 * * *`, async () => {
   await triggerHeartbeat(heartbeat.nodeCron);
   const linnOrderSync = await requestLinnworksSync(stradaUrl, time);
   if(linnOrderSync.success && !failure.linnOrderSync) {
-    failure.linnOrderSync = true;
     emailError('Failed to Sync with Algolia', String(linnOrderSync.err));
   }
+
+  failure.linnOrderSync = linnOrderSync.success;
 });
 
 cron.schedule(`*/10 * * * *`, async () => {
   const time = (new Date()).toISOString().slice(11,19);
   const algoliaSync = await requestAlgoliaSync(stradaUrl, time);
   if(algoliaSync.success && !failure.algoliaOrderSync) {
-    failure.algoliaOrderSync = true;
     emailError('Failed to Sync with Algolia', String(algoliaSync.err));
   }
+  failure.algoliaOrderSync = algoliaSync.success;
 });
 
 const emailError = async (error_string: string, error: string) => {
