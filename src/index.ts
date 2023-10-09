@@ -5,7 +5,10 @@ import * as postmark from 'postmark'
 
 const stradaUrl = 'beta-strada.thetechout.com';
 
-let failure = 0;
+let failure = {
+  linnOrderSync: 0,
+  algoliaOrderSync: 0,
+};
 
 const requestLinnworksSync = async (time: string) => {
   try {
@@ -21,12 +24,11 @@ const requestLinnworksSync = async (time: string) => {
     } else {
       console.log(chalk.green(`[${time}][${request.build}] cled7kdse0000deq0ymdgv7au Order Sync. ${request.message} [${request.orders.length || "Unknown"} Orders Synced]`));
     }
-    failure = 0;
+    failure.linnOrderSync = 0;
   } catch (error) {
-    
-    if(failure != 1) {
+    if(failure.linnOrderSync != 1) {
       emailError("Linnworks Order Sync Failure")
-      failure = 1;
+      failure.linnOrderSync = 1;
     }
     console.log(error);
     console.log(chalk.red('Failed to request Linnworks Sync'));
@@ -44,12 +46,11 @@ const requestAlgoliaSync = async (time: string) => {
     } else {
       console.log(chalk.green(`[${time}][${request.data.build}] cled7kdse0000deq0ymdgv7au Order Sync. ${request.data.message}`));
     }
-    failure = 0;
+    failure.algoliaOrderSync = 0;
   } catch (error) {
-    
-    if(failure != 1) {
+    if(failure.algoliaOrderSync != 1) {
       emailError("Algolia Sync Failure")
-      failure = 1;
+      failure.algoliaOrderSync = 1;
     }
     console.log(error);
     console.log(chalk.red('Failed to request Algolia Sync'));
