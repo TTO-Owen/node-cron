@@ -3,7 +3,7 @@ import axios from 'axios';
 import chalk from 'chalk';
 import * as postmark from 'postmark'
 
-const stradaUrl = 'beta-strada.thetechout.com';
+const stradaUrl = 'strada.thetechout.com';
 
 let failure = {
   linnOrderSync: 0,
