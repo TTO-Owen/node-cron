@@ -16,7 +16,7 @@ export const requestAlgoliaSync = async (stradaUrl: string, time: string) => {
     await triggerHeartbeat(heartbeat.algoliaSync);
     return { success: false, err: "" }
   } catch (error) {
-    console.log(chalk.red('Failed to request Algolia Sync'));
+    console.log(chalk.grey(`[${time}][${chalk.red('ERROR')}] Failed to request Algolia Sync`));
     return { success: false, err: error }
   }
 };

@@ -19,7 +19,7 @@ export const requestLinnworksSync = async (stradaUrl: string, time: string) => {
     await triggerHeartbeat(heartbeat.linnSync);
     return { success: true, err: '' }
   } catch (error) {
-    console.log(chalk.red('Failed to request Linnworks Sync'));
+    console.log(chalk.grey(`[${time}][${chalk.red('ERROR')}] Failed to request Linnworks Sync`));
     return { success: false, err: error }
   }
 };
